@@ -13,7 +13,8 @@ from telebot import types
 from telebot.types import (ReplyKeyboardMarkup, KeyboardButton,
                           ReplyKeyboardRemove, InlineKeyboardMarkup,
                           InlineKeyboardButton)
-
+from flask import Flask
+from threading import Thread 
 bot = telebot.TeleBot('7376838326:AAFcVYOPhlhZFLsrU6I-7jAWSDZ0MPamyKo')
 
 
@@ -61,6 +62,10 @@ def save_data(message, name):
         reply_markup=markup
     )
 
-    
 if __name__ == "__main__":
-    (bot.polling(non_stop=True))
+    # Запуск Flask в отдельном потоке (добавьте в самый низ перед polling)
+    flask_thread = Thread(target=lambda: app.run(host='0.0.0.0', port=8080))
+    flask_thread.daemon = True  # Чтобы поток завершался с основным
+    flask_thread.start()
+    
+    bot.polling(non_stop=True)
