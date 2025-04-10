@@ -14,7 +14,7 @@ from telebot.types import (ReplyKeyboardMarkup, KeyboardButton,
                           ReplyKeyboardRemove, InlineKeyboardMarkup,
                           InlineKeyboardButton)
 
-bot = telebot.TeleBot('7376838326:AAFcVYOPhlhZFLsrU6I-7jAWSDZ0MPamyKo')
+bot = telebot.TeleBot('7376838326:AAHEgX8RgRnUJZwhHMRr6J198N2yrFCewrA')
 
 
 # Функция сохранения в CSV
