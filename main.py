@@ -61,6 +61,18 @@ def save_data(message, name):
         reply_markup=markup
     )
 
+from flask import Flask
+from threading import Thread
 
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Бот активен!"
+
+# Добавьте этот код перед bot.polling()
+def run_flask():
+    app.run(host='0.0.0.0', port=8080)  # Render требует порт 8080 или 10000
+    
 if __name__ == "__main__":
     (bot.polling(non_stop=True))
