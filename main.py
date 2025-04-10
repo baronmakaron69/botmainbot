@@ -63,9 +63,14 @@ def save_data(message, name):
     )
 
 if __name__ == "__main__":
-    # Запуск Flask в отдельном потоке (добавьте в самый низ перед polling)
+    # Запускаем Flask в отдельном потоке
     flask_thread = Thread(target=lambda: app.run(host='0.0.0.0', port=8080))
-    flask_thread.daemon = True  # Чтобы поток завершался с основным
+    flask_thread.daemon = True  # Автоматически завершится при выходе
     flask_thread.start()
     
-    bot.polling(non_stop=True)
+    # Убедитесь, что polling запущен ОДИН раз
+    try:
+        bot.polling(non_stop=True, interval=1)
+    except Exception as e:
+        print(f"Бот упал: {e}")
+        # Можно добавить автоматический перезапуск
